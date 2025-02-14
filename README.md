@@ -1,8 +1,13 @@
 const express = require('express');
 const app = express();
+
+// Render-এর জন্য ডাইনামিক পোর্ট ব্যবহার করুন
 const port = process.env.PORT || 3000;
 
-// Route to handle the request
+app.get('/', (req, res) => {
+    res.send('Server is running!');
+});
+
 app.get('/pranto/', (req, res) => {
     const uid = req.query.uid;
     const region = req.query.region;
@@ -18,7 +23,7 @@ app.get('/pranto/', (req, res) => {
     return res.json({ message: responseText });
 });
 
-// Start the server
+// সার্ভার চালু করুন
 app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+    console.log(`Server is running on port ${port}`);
 });
