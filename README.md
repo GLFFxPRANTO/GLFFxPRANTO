@@ -1,29 +1,23 @@
-const express = require('express');
-const app = express();
+from flask import Flask, request, jsonify
 
-// Render-এর জন্য ডাইনামিক পোর্ট ব্যবহার করুন
-const port = process.env.PORT || 3000;
+app = Flask(__name__)
 
-app.get('/', (req, res) => {
-    res.send('Server is running!');
-});
+@app.route('/')
+def home():
+    return "Server is running!"
 
-app.get('/pranto/', (req, res) => {
-    const uid = req.query.uid;
-    const region = req.query.region;
+@app.route('/pranto/', methods=['GET'])
+def get_data():
+    uid = request.args.get('uid')
+    region = request.args.get('region')
 
-    if (!uid || !region) {
-        return res.status(400).json({ error: 'Missing parameters' });
-    }
+    if not uid or not region:
+        return jsonify({"error": "Missing parameters"}), 400
 
-    // Example logic - Replace with actual data
-    const visits = 22;
+    visits = 22
+    response_text = f"PLAYER GOT {visits} VISIT..CONTACT @ASIBHASANPRANTOO"
+    
+    return jsonify({"message": response_text})
 
-    const responseText = `PLAYER GOT ${visits} VISIT..CONTACT @ASIBHASANPRANTOO`;
-    return res.json({ message: responseText });
-});
-
-// সার্ভার চালু করুন
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-});
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
