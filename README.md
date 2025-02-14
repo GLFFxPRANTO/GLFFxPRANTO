@@ -1,16 +1,24 @@
-## Hi there 👋
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
 
-<!--
-**GLFFxPRANTO/GLFFxPRANTO** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+// Route to handle the request
+app.get('/pranto/', (req, res) => {
+    const uid = req.query.uid;
+    const region = req.query.region;
 
-Here are some ideas to get you started:
+    if (!uid || !region) {
+        return res.status(400).json({ error: 'Missing parameters' });
+    }
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+    // Example logic - Replace with actual data
+    const visits = 22;
+
+    const responseText = `PLAYER GOT ${visits} VIDIT..CONTACT @ASIBHASANPRANTOO`;
+    return res.json({ message: responseText });
+});
+
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
