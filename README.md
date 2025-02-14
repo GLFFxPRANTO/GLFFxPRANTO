@@ -14,7 +14,7 @@ app.get('/pranto/', (req, res) => {
     // Example logic - Replace with actual data
     const visits = 22;
 
-    const responseText = `PLAYER GOT ${visits} VIDIT..CONTACT @ASIBHASANPRANTOO`;
+    const responseText = `PLAYER GOT ${visits} VISIT..CONTACT @ASIBHASANPRANTOO`;
     return res.json({ message: responseText });
 });
 
